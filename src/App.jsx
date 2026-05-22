@@ -10,25 +10,40 @@ import DetailPage from './pages/DetailPage';
 function App() {
   const [books, setBooks] = useState([]);
   const [reviews, setReviews] = useState([]);
-
+  const [loading, setLoading] = useState(true); 
   useEffect(() => {
     async function loadData() {
       try {
-        const booksRes = await fetch('http://localhost:3001/books');
-        const reviewsRes = await fetch('http://localhost:3001/reviews');
-        setBooks(await booksRes.json());
-        setReviews(await reviewsRes.json());
+        const booksRes = await fetch('http://localhost:3000/books');
+        const reviewsRes = await fetch('http://localhost:3000/reviews');
+        const res1 = await booksRes.json()
+        setBooks(res1);
+        const res2 = await reviewsRes.json()
+        setReviews(res2);
       } catch (err) {
         console.error('데이터 불러오기 실패:', err);
       }
+      setLoading(false);
     }
     loadData();
   }, []);
 
-  const handleReviewLike = async => (id){
+
+    //  create 관련 함수 
+  const handleCreateBook = async (newBook) => {
+    const res = await fetch('http://localhost:3000/books', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newBook),
+    });
+    const savedBook = await res.json();
+    setBooks([savedBook, ...books]);
+    return savedBook;
+  };
+  const handleReviewLike = async (id) => {
     const review = reviews.find( r => r.id ===id);
 
-    const res = await fetch(`http://localhost:3001/reviews/${id}`, {
+    const res = await fetch(`http://localhost:3000/reviews/${id}`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ likes: review.likes + 1 }),
@@ -54,6 +69,10 @@ function App() {
     }
   };
 
+
+  if (loading) {
+    return <div>전체 데이터를 불러오는 중입니다...</div>;
+  }
   return (
     <div>
       <header className="header">

@@ -1,6 +1,6 @@
-import { formatDate, getLatestDate } from "./utils.js";
+//import { formatDate, getLatestDate } from "./utils.js";
 
-function BookReportDetailItem({ review, bookTitle, onLike, onEdit, onDelete }) {
+function ReviewItem({ review, bookTitle, onLike, onEdit, onDelete }) {
   return (
     <article className="review-card no-click">
       <div className="review-main">
@@ -8,7 +8,7 @@ function BookReportDetailItem({ review, bookTitle, onLike, onEdit, onDelete }) {
         <p className="review-nickname">{review.nickname}</p>
         <p className="review-content">{review.content}</p>
         <p className="review-date">
-          최근 작성/수정: {formatDate(getLatestDate(review))}
+          최근 작성/수정:
         </p>
       </div>
 
