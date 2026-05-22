@@ -1,5 +1,5 @@
 import './App.css';
-import db from '../db.json';
+import db from '../../db.json';
 
 function App() {
 
