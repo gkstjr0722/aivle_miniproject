@@ -80,4 +80,4 @@ function BookReportDetailList({ book, review,  onCreate, onReviewLike, onReviewE
   );
 }
 
-export default ReviewForm;
+export default BookReportDetailList;
