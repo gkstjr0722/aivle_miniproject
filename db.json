@@ -566,14 +566,14 @@
       "updatedAt": "2026-05-22T10:00:00.000Z"
     },
     {
+      "id": "26",
       "bookId": "2BmT__1",
       "bookTitle": "달빛 도서관",
       "nickname": "도서관광팬",
       "content": "너무 재밌는 판타지도서에요!",
       "likes": 33,
       "createdAt": "2026-05-26T02:36:57.491Z",
-      "updatedAt": "2026. 05. 26. 오전 11:38",
-      "id": "sca_Qdy"
+      "updatedAt": "2026. 05. 26. 오전 11:38"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
