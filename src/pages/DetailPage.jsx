@@ -8,7 +8,7 @@ function DetailPage({books, reviews,onReviewAdd, onReviewLike, onReviewEdit, onR
     const { id } = useParams();
     const navigate = useNavigate();
     const book = books.find( b => String(b.id) === String(id));
-
+    
     const [isEditing, setIsEditing] = useState(false);
 
     const handleBookDelete = () =>{
@@ -48,6 +48,7 @@ function DetailPage({books, reviews,onReviewAdd, onReviewLike, onReviewEdit, onR
                 <div className="detail-info">
                     <h2>{book.title}</h2>
                     <p>{book.content}</p>
+                    <p>{book.tag?.map(t=> `#${t} ` )}</p>
                     <p>생성일/수정일: {formatDate(getLatestDate(book))}</p>
                 </div>
             

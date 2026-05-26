@@ -67,7 +67,7 @@ function BookDetailEdit({book, onEdit, onCancel}) {
     const isConfirmed = window.confirm("정말 수정하시겠습니까?");
     if (!isConfirmed) return;
     try {
-      await onEdit({ title, author, content, coverImageUrl, updatedAt: new Date() });
+      await onEdit({ title, author, content, coverImageUrl});
     } catch (err) {
       alert(`등록 실패: ${err.message}`);
     }

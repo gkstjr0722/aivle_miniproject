@@ -1,14 +1,33 @@
 import { Link, useSearchParams } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-function ListPage({ books }) {
+function ListPage({ books, tags }) {
   const [searchParams] = useSearchParams();
 
   const keyword = searchParams.get('keyword') || '';
+
+  const [selectedTags, setSelectedTags] = useState([]);
+  useEffect(()=>{
+    if (!tags || tags.length === 0) return;
+
+    setSelectedTags([...tags, "없음"]);}
+    ,[tags])
+
   const filteredBooks = books.filter((book) =>
-    book.title
+  {
+    const keyward_bool = book.title
       .toLowerCase()
       .includes(keyword.toLowerCase())
+    let tag_bool = true;
+    if (selectedTags.includes('없음'))
+      tag_bool = (!book.tag || book.tag.length === 0) 
+      ? true : selectedTags.some(t => book.tag.includes(t));
+    else
+      tag_bool =  (!book.tag || book.tag.length === 0) 
+      ? false : selectedTags.some(t => book.tag.includes(t) )
+
+      return keyward_bool && tag_bool
+  }
   );
   const [sortType, setSortType] = useState('latest');
 
@@ -28,6 +47,14 @@ function ListPage({ books }) {
 
     return 0;
   });
+
+  const handleTagClick = (tag) => {
+    if (selectedTags.includes(tag)) {
+      setSelectedTags(selectedTags.filter(t=>t!==tag)); 
+    } else {
+      setSelectedTags([...selectedTags, tag]); 
+    }
+  };
 
   return (
     <div className="list-page">
@@ -65,6 +92,31 @@ function ListPage({ books }) {
           좋아요순
         </button>
 
+      {/* ─── 태그 한 줄 출력 영역 ─── */}
+      <div style={{ display: 'flex', gap: '10px', marginBottom: '20px', flexWrap: 'wrap' }}>
+        {['없음',...tags].map((t) => {
+          const isSelected = selectedTags.includes(t); 
+          return (
+            <span
+              key={t}
+              onClick={() => handleTagClick(t)}
+              style={{
+                cursor: 'pointer',
+                padding: '4px 8px',
+                borderRadius: '4px',
+                // 🔥 On/Off 상태에 따라 스타일 변화 (예: 선택되면 파란색/굵게)
+                backgroundColor: isSelected ? '#007bff' : '#f0f0f0',
+                color: isSelected ? '#fff' : '#333',
+                fontWeight: isSelected ? 'bold' : 'normal',
+                transition: 'all 0.2s',
+              }}
+            >
+              #{t}
+            </span>
+          );
+        })}
+  
+      </div>
       </div>
       <div className="book-list">
 

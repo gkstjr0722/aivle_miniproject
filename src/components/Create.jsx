@@ -65,7 +65,7 @@ function Create({ onCreate }) {
       return;
     }
     try {
-      await onCreate({ title, author, content, likes: 0, coverImageUrl });
+      await onCreate({ title, author, content, likes: 0, coverImageUrl, createdAt: new Date()});
     } catch (err) {
       alert(`등록 실패: ${err.message}`);
     }

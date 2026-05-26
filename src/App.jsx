@@ -11,7 +11,8 @@ import ReviewListPage from './pages/ReviewListPage';
 function App() {
   const [books, setBooks] = useState([]);
   const [reviews, setReviews] = useState([]);
-  const [loading, setLoading] = useState(true); 
+  const [loading, setLoading] = useState(true);
+  const [tags, setTags] = useState([]);
   useEffect(() => {
     async function loadData() {
       try {
@@ -21,14 +22,20 @@ function App() {
         setBooks(res1);
         const res2 = await reviewsRes.json()
         setReviews(res2);
+        
+
       } catch (err) {
         console.error('데이터 불러오기 실패:', err);
       }
       setLoading(false);
+      
     }
     loadData();
   }, []);
 
+  useEffect(() => {
+    setTags([...new Set(books.flatMap(b => b.tag ? b.tag : []))]);
+  }, [books]); 
 
     //  create 관련 함수 
   const handleCreateBook = async (newBook) => {
@@ -62,7 +69,7 @@ function App() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ likes: book.likes + 1 }),
       });
-
+  
       const updated = await res.json();
       setBooks(books.map((b) => (String(b.id) === String(id) ? updated : b)));
     } catch (err) {
@@ -158,7 +165,7 @@ function App() {
       <main className="container">
         <Routes>
           <Route path="/" element={<HomePage books={books} reviews={reviews} />} />
-          <Route path="/list" element={<ListPage books={books} />} />
+          <Route path="/list" element={<ListPage books={books} tags={tags} />} />
           <Route path="/create" element={<CreatePage onCreateBook={handleCreateBook} />} />
           <Route path="/detail/:id" element={<DetailPage books={books} reviews={reviews}
               onBookEdit={handleBookEdit} onBookDelete={handleBookDelete} onBookLikes={handleBookLikes}
