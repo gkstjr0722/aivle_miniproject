@@ -44,6 +44,11 @@ function HomePage({ books, reviews }) {
               key={book.id}
             >
 
+            <Link
+              to={`/detail/${book.id}`}
+              className="image-link"
+            >
+
               <div className="image-wrap">
 
                 <img
@@ -52,6 +57,8 @@ function HomePage({ books, reviews }) {
                 />
 
               </div>
+
+            </Link>
 
               <div className="book-content">
 
@@ -70,17 +77,6 @@ function HomePage({ books, reviews }) {
                 <span className="author">
                   {book.author}
                 </span>
-
-                <p>
-                  {book.content}
-                </p>
-
-                <Link
-                  to={`/detail/${book.id}`}
-                  className="detail-link"
-                >
-                  자세히 보기
-                </Link>
 
               </div>
 
