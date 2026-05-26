@@ -18,19 +18,29 @@ function DetailPage({books, reviews,onReviewAdd, onReviewLike, onReviewEdit, onR
     return(
         <>
         <div className="detail-content-area">
-            <div className="detail-poster">
-            {book.coverImageUrl !='' ? 
-            <img src = {book.coverImageUrl} img='img'/> : <></>}
+            <div className="detail-main">
+                <div className="detail-poster">
+                {book.coverImageUrl !='' ? 
+                <img src = {book.coverImageUrl} img='img'/> : <></>}
+                </div>
+            
+                <div className="detail-info">
+                    <h2>{book.title}</h2>
+                    <p>{book.content}</p>
+                    <p>생성일: {new Date(book.createdAt).toLocaleDateString()}</p>
+                </div>
+            
+            
+                <div className="detail-action">
+                    <button onClick={()=>onBookLikes(id)}>❤️{book.likes} </button>
+                    <button onClick={()=>onBookEdit(id)}>수정하기</button>
+                    <button onClick={handleBookDelete}>삭제하기</button>
+                </div>
+
             </div>
-            <div className="detail-info">
-                <h2>{book.title}</h2>
-                <p>{book.content}</p>
-                <p>생성일: {new Date(book.createdAt).toLocaleDateString()}</p>
-            </div>
-            <button onClick={()=>onBookLikes(id)}>❤️{book.likes} </button>
-            <button onClick={()=>onBookEdit(id)}>수정하기</button>
-            <button onClick={handleBookDelete}>삭제하기</button>
+           
         </div>
+        
         <BookReportDetailList
             review= {reviews.filter(p => String(p.bookId) === String(book.id) )}
             book={book}
