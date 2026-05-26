@@ -1,5 +1,6 @@
 import '../App.css';
-import { Link } from 'react-router-dom';
+import BookHomeList from '../components/BookHomeList';
+import BookReportHomeList from '../components/BookReportHomeList';
 
 function HomePage({ books, reviews }) {
 
@@ -27,118 +28,9 @@ function HomePage({ books, reviews }) {
 
       </div>
 
-      <section className="top-book-section">
+      <BookHomeList books={topBooks} />
 
-        <div className="section-title">
-          <h2 className="section-main-title">
-            월간 인기 도서
-          </h2>
-        </div>
-
-        <div className="book-list">
-
-          {topBooks.map((book) => (
-
-            <div
-              className="book-card"
-              key={book.id}
-            >
-
-            <Link
-              to={`/detail/${book.id}`}
-              className="image-link"
-            >
-
-              <div className="image-wrap">
-
-                <img
-                  src={book.coverImageUrl}
-                  alt={book.title}
-                />
-
-              </div>
-
-            </Link>
-
-              <div className="book-content">
-
-                <div className="top-row">
-
-                  <h2>
-                    {book.title}
-                  </h2>
-
-                  <div className="book-like">
-                    ❤️ {book.likes}
-                  </div>
-
-                </div>
-
-                <span className="author">
-                  {book.author}
-                </span>
-
-              </div>
-
-            </div>
-
-          ))}
-
-        </div>
-
-      </section>
-
-      <section className="review-section">
-
-        <div className="review-title-wrap">
-
-          <h2 className="section-main-title">
-            인기 리뷰
-          </h2>
-
-        </div>
-
-        <div className="review-list">
-
-          {topReviews.map((review) => (
-
-            <div
-              className="review-card"
-              key={review.id}
-            >
-
-              <div className="review-top">
-
-                <div>
-
-                  <h3>
-                    {review.nickname}
-                  </h3>
-                  <span>
-                    {
-                      books.find(
-                        (b) =>
-                          String(b.id) ===
-                          String(review.bookId)
-                      )?.title
-                    }
-                  </span>
-                </div>
-
-                <div className="review-like">
-                  ❤️ {review.likes}
-                </div>
-              </div>
-              <p>
-                {review.content}
-              </p>
-            </div>
-
-          ))}
-
-        </div>
-
-      </section>
+      <BookReportHomeList reviews={topReviews} books={books} />
 
     </div>
   );
