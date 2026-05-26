@@ -122,13 +122,13 @@ function App() {
     <div>
       <header className="header">
         <div className="logo">
-          <h1>📚 도서관리</h1>
+          <h1 className="logo">📚 도서관리</h1>
         </div>
 
         <nav>
           <Link to="/">홈</Link>
           <Link to="/list">도서목록</Link>
-          <Link to="/create" className="header button">+ 새 도서 등록</Link>
+          <Link to="/create" className="add-book-btn">+ 새 도서 등록</Link>
         </nav>
       </header>
 
