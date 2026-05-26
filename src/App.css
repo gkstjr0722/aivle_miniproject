@@ -1008,7 +1008,7 @@ body {
 }
 
 .home-book-card {
-  width: 280px;
+  width: 300px;
 
   background: white;
 
@@ -1048,7 +1048,7 @@ body {
 }
 
 .home-book-content {
-  padding: 20px;
+  padding: 5px;
 
   display: flex;
   flex-direction: column;
@@ -1070,42 +1070,51 @@ body {
 
   line-height: 1.4;
 
-  min-height: 80px;
-}
-
-.home-book-like {
-  background: #fff0f4;
-
-  color: #ff4f7d;
-
-  padding: 8px 18px;
-  font-size: 16px;
-
-  border-radius: 999px;
-
-  font-weight: 700;
-}
-
-.home-author {
-  background: #eef2ff;
-  color: #4b5563;
-
-  padding: 8px 16px;
-  border-radius: 999px;
-  font-size: 16px;
-
-  font-size: 14px;
-  font-weight: 600;
-
-  max-width: 220px;
+  min-height: 20px;
 
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-
-  display: block;
+  width: 100%;
 }
+.home-book-like {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
+  min-width: 78px;
+  height: 36px;
+
+  background: #fff0f4;
+  color: #ff4f7d;
+
+  padding: 0 16px;
+  font-size: 14px;
+
+  border-radius: 999px;
+
+  font-weight: 700;
+
+  flex-shrink: 0;
+}
+.home-author {
+  background: #eef2ff;
+  color: #4b5563;
+
+  padding: 6px 10px;
+
+  border-radius: 999px;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  max-width: 200px;
+}
 .review-card-link {
   text-decoration: none;
   color: inherit;
@@ -1125,6 +1134,8 @@ body {
 
   height: 200px;
   transition: 0.3s;
+
+  text-align: left; 
 }
 
 .review-card:hover {
@@ -1197,4 +1208,64 @@ body {
   text-overflow: ellipsis;
 
   box-sizing: border-box;
+}
+
+.review-page-title {
+  text-align: center;
+
+  margin-bottom: 40px;
+}
+
+.review-list-page {
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fit, minmax(350px, 1fr));
+
+  gap: 24px;
+}
+
+.review-card {
+  position: relative;
+
+  overflow: hidden;
+
+  background: white;
+}
+
+/* 리뷰 카드에 책 배경 홀로그램 추가 */
+/* .review-card::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  background-image: var(--book-cover);
+
+  background-size: cover;
+  background-position: center;
+
+  opacity: 0.4;
+
+  filter: blur(1px);
+
+  transform: scale(1.1);
+
+  z-index: 0;
+}
+
+.review-card > * {
+  position: relative;
+
+  z-index: 1;
+} */
+
+.home-book-meta {
+  display: flex;
+  align-items: center;
+
+  justify-content: flex-start;
+  gap: 6px;
+  width: 100%;
 }
