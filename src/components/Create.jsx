@@ -153,7 +153,7 @@ const addTag = () => {
     }
   };
 
-  const handelCreateTag = async () => {
+  const handleCreateTag = async () => {
     
     if (!apiKey.trim()) {
       alert('OpenAI API Key를 입력하세요');
@@ -278,27 +278,56 @@ const addTag = () => {
           <option value="high">High</option>
         </select>
       </div>
-<div>
+<div className="create-tag-box">
   {tags?.map((tag, index) => (
-    <span key={index} style={{ marginRight: "8px" }}>
-      #
+    <div className="create-tag-chip" key={index}>
+      <span className="create-tag-hash">#</span>
+
       <input
+        className="create-tag-input"
         value={tag}
+        size={Math.max(tag.length, 2)}
         onChange={(e) => updateTag(index, e.target.value)}
-        style={{ width: "80px" }}
       />
-      <button onClick={() => deleteTag(index)}>x</button>
-    </span>
+
+      <button
+        className="create-tag-delete"
+        onClick={() => deleteTag(index)}
+        type="button"
+      >
+        ×
+      </button>
+    </div>
   ))}
 
-  <input
-    value={newTag}
-    onChange={(e) => setNewTag(e.target.value)}
-    placeholder="태그 추가"
-  />
+  <div className="create-tag-add">
+    <input
+      className="create-tag-add-input"
+      value={newTag}
+      onChange={(e) => setNewTag(e.target.value)}
+      onKeyDown={(e) => {
+        if (e.key === "Enter") addTag();
+      }}
+      placeholder="태그 추가"
+    />
 
-  <button onClick={addTag}>추가</button>
-  <button onClick={handelCreateTag} disabled={generatingTag}>{generating ? '생성 중...' : '자동 생성'}</button>
+    <button
+      className="create-tag-add-button"
+      onClick={addTag}
+      type="button"
+    >
+      추가
+    </button>
+
+    <button
+      className="create-tag-auto-button"
+      onClick={handleCreateTag}
+      disabled={generatingTag}
+      type="button"
+    >
+      {generatingTag ? "생성 중..." : "자동 생성"}
+    </button>
+  </div>
 </div>
       <button type="button" onClick={handleGenerateCover} disabled={generating}>
         {generating ? '생성 중...' : 'AI 표지 생성'}
