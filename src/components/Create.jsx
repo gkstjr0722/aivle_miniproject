@@ -141,7 +141,7 @@ const addTag = () => {
         content: content.trim(),
         likes: 0,
         coverImageUrl,
-        tag: tags,
+        tags: tags,
 
         createdAt: now,
         updatedAt: now,
