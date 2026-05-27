@@ -34,9 +34,11 @@ function App() {
   }, []);
 
   useEffect(() => {
+
     setTags([...new Set(books.flatMap(b => b.tag ? b.tag : []))]);
 
   }, [books]); 
+
 
     //  create 관련 함수 
   const handleCreateBook = async (newBook) => {
